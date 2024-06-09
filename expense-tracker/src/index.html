@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E8EBE4;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #798071;
+        }
+
+        #expense-form {
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #B8BACF;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #D2D5DD;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #999AC6;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #999AC6;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #798071;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #999AC6;
+        }
+
+        #expense-list {
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #B8BACF;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #D2D5DD;
+        }
+
+        #expense-list h2 {
+            margin-top: 0;
+        }
+
+        #expense-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #expense-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+
+    <div id="expense-form">
+        <h2>Add Expense</h2>
+        <label for="expense-name">Name:</label>
+        <input type="text" id="expense-name" placeholder="Expense Name">
+        <label for="expense-category">Category:</label>
+        <select id="expense-category">
+            <option value="food">Food</option>
+            <option value="transportation">Transportation</option>
+            <option value="housing">Housing</option>
+            <option value="utilities">Utilities</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="other">Other</option>
+        </select>
+        <label for="expense-amount">Amount:</label>
+        <input type="number" id="expense-amount" placeholder="Amount">
+        <button onclick="addExpense()">Add Expense</button>
+    </div>
+
+    <div id="expense-list">
+        <h2>Expense List</h2>
+        <ul id="expenses"></ul>
+    </div>
+
+    <script>
+        function addExpense() {
+            const name = document.getElementById('expense-name').value;
+            const category = document.getElementById('expense-category').value;
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+
+            if (!name || isNaN(amount)) {
+                alert('Please enter a valid name and amount.');
+                return;
+            }
+
+            const expense = {
+                name,
+                category,
+                amount
+            };
+
+            const expensesList = document.getElementById('expenses');
+            const li = document.createElement('li');
+            li.textContent = `${expense.name} - ${expense.category} - $${expense.amount.toFixed(2)}`;
+            expensesList.appendChild(li);
+
+            document.getElementById('expense-name').value = '';
+            document.getElementById('expense-amount').value = '';
+        }
+    </script>
+</body>
+</html>
